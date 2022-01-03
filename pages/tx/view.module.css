@@ -1,0 +1,13 @@
+.metadata {
+  margin: 10px;
+}
+
+.metadata > div {
+  margin-top: 10px;
+  display: flex;
+}
+
+.metadata > div > div {
+  min-width: 140px;
+  overflow-wrap: anywhere;
+}

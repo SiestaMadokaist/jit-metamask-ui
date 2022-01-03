@@ -1,0 +1,14 @@
+.txlog {
+  margin: 10px;
+  border: 1px black solid;
+  width: 500px;
+}
+
+.flexContainer {
+  /* margin: 5px; */
+  display: flex;
+}
+
+.flexContainer > div {
+  margin: 5px;
+}

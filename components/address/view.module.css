@@ -1,0 +1,18 @@
+.wrapper {
+  display: block;
+}
+
+.wrapper > div {
+  display: flex;
+}
+
+.buttonWrapper {
+  display: flex;
+  margin-bottom: 5px;
+}
+
+.buttonWrapper > button {
+  min-width: 40px;
+  min-height: 40px;
+  margin-right: 5px;
+}
