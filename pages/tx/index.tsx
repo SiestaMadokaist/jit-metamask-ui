@@ -12,7 +12,7 @@ export default function UIListTx(): JSX.Element {
       if (!provider) { return; }
       const currentBlock = await provider.getBlockNumber();
       const txs: string[] = [];
-      for (let i = 0; i < 30; i++) {
+      for (let i = 0; i < 50; i++) {
         const block = await provider.getBlock(currentBlock - i);
         block.transactions.forEach((tx) => txs.push(tx));
       };

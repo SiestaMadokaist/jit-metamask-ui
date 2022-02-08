@@ -5,7 +5,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "e": "pwd",
+    "c:pancake": "cp ./public/template/PancakePair.json public/abis/$A.json"
   },
   "dependencies": {
     "@cryptoket/new-number": "^1.0.29",

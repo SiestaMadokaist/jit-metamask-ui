@@ -97,6 +97,7 @@ export function TxCall(props: ITxCall): JSX.Element {
     if (!contract) { return; }
     if (f.constant) {
       const v = await contract[f.name](...inputs);
+      console.log({ v, inputs });
       setReturnValue(v);  
     } else {
       const provider = MainState.get('provider');
@@ -134,7 +135,15 @@ export function TxCall(props: ITxCall): JSX.Element {
         {f.inputs.map((input, index) => {
           const onChange = (v: unknown) => {
             const next = [...inputs];
-            next[index] = v;
+            if (input.type.startsWith('uint')) {
+              next[index] = ethers.BigNumber.from(v);
+            } else {
+              try {
+                next[index] = JSON.parse(v as string);
+              } catch (error) {
+                next[index] = v;
+              }  
+            };
             setInputs(next);
           }
           return (<InputField key={input.name} input={input} onChange={onChange}></InputField>);

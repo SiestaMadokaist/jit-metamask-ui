@@ -86,6 +86,8 @@ export function EtherValue(props: IEtherValue): JSX.Element {
       if (isTokenAmount(props)) {
         const v = new NewNumber.Numeric(value.toString(), -info.decimals, 10);
         return (<span key={props.key}>{v.normalized().toFixed(8)} {info.name}</span>)
+      } else if (value instanceof Array) {
+        return (<pre>{JSON.stringify(value, null, 2)}</pre>)
       } else {
         return (<span key={props.key}>{value.toString()}</span>);
       }

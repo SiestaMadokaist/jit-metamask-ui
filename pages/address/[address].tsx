@@ -8,6 +8,7 @@ import { MainState } from "../../lib/MainApp/state";
 import { TxCall } from "../../components/address/TxCall";
 import { Sorter } from "../../lib/sorter";
 import EventLog, { EventAddress } from './[address]/events';
+import { InternalLink } from "../../lib/InternalLink";
 
 export default function UIAddress(): JSX.Element {
   const router = useRouter();
@@ -16,7 +17,7 @@ export default function UIAddress(): JSX.Element {
   const [info, setInfo] = useState<{ balance: ethers.BigNumber, txCount: number }>({ balance: ethers.BigNumber.from(0), txCount: 0 });
   const [name, setName] = useState<string>('Standard Address');
   const [toggleEventShown, toggleEvent] = useState<boolean>();
-  const [tokens, setTokens] = useState<Array<{ unit: string; balance: NewNumber.Cash }>>([]);
+  const [tokens, setTokens] = useState<Array<{ address: string; unit: string; balance: NewNumber.Cash }>>([]);
   useEffect(() => {
     const provider = MainState.get('provider');
     if (!address) { return; }
@@ -56,8 +57,11 @@ export default function UIAddress(): JSX.Element {
         Balance: {NewNumber.wei(info.balance.toString()).normalized().toFixed(8)} ETH
       </div>
       <div style={{ margin: '10px'}}>
-      <div style={{ height: '30px', width: '30%' }}>
-        {tokens.map((t) => (<div style={{ height: '30px', borderBottom: '1px black solid' }} key={t.unit}>{t.balance.toString()} {t.unit}</div>))}
+      <div style={{ height: '30px', width: '30%', }}>
+        {tokens.map((t) => (<div style={{ display: 'flex', height: '30px', marginBottom: '5px' }} key={t.unit}>
+          <div style={{ width: '200px'}}>{t.balance.toString()}</div>
+          <div style={{ width: '200px' }}><InternalLink type='address' value={t.address} /></div>  
+        </div>))}
       </div>
       </div>
     </MainApp>);
@@ -91,9 +95,10 @@ export default function UIAddress(): JSX.Element {
       Nonce: {info.txCount}
     </div>
     <div style={{ margin: '10px'}}>
-      <select style={{ height: '30px' }}>
-        {tokens.map((t) => (<option style={{ height: '30px' }} key={t.unit}>{t.balance.toString()} {t.unit}</option>))}
-      </select>
+        {tokens.map((t) => (<div style={{ display: 'flex', height: '30px', marginBottom: '5px' }} key={t.unit}>
+          <div style={{ width: '200px'}}>{t.balance.toString()}</div>
+          <div style={{ width: '200px' }}><InternalLink type='address' value={t.address} /></div>  
+        </div>))}
     </div>
     <div style={{ display: 'flex'}}>
       <div style={{ width: '48%', borderRight: '1px black solid' }}>

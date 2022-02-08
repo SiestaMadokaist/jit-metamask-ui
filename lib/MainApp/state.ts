@@ -1,3 +1,4 @@
+import { NewNumber } from '@cryptoket/new-number';
 import { ethers } from 'ethers';
 import { makeAutoObservable } from 'mobx';
 interface IState {
@@ -6,6 +7,8 @@ interface IState {
   signerAddress?: string;
   rpcProvider?: ethers.providers.JsonRpcProvider;
   title?: string;
+  gasPrice: NewNumber.Multiplier;
+  ethPrice: NewNumber.Multiplier
 }
 
 export class _MainState {
@@ -15,6 +18,8 @@ export class _MainState {
     signerAddress: undefined,
     title: undefined,
     rpcProvider: new ethers.providers.JsonRpcProvider('http://localhost:7000'),
+    gasPrice: NewNumber.multiplier(1),
+    ethPrice: NewNumber.multiplier(1),
   };
 
   constructor() {

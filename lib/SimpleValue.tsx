@@ -44,6 +44,10 @@ export function SimpleValue(props: IEtherValue): JSX.Element {
   const [decimal, setDecimal] = useState<number>(0);
   if (!value) {
     return (<div></div>);
+  } else if (value instanceof Array) { 
+    return (<pre>
+      {JSON.stringify(value.map((v) => `${v}`), null, 2)}
+    </pre>);
   } else if (type === 'address') {
     const value = props.value as string;
     return (<InternalLink type="address" value={value}></InternalLink>)

@@ -25,19 +25,22 @@ class _ContractHandler {
     return Promise.all(knownAddress.map((ka: string) => this.load(ka, provider)));
   }
 
-  async tokenBalances(provider: ethers.providers.BaseProvider, address: string): Promise<Array<{ unit: string; balance: NewNumber.Cash }>> {
+  async tokenBalances(provider: ethers.providers.BaseProvider, address: string): Promise<Array<{ address: string; unit: string; balance: NewNumber.Cash }>> {
     const tokens = await this.tokens(provider);
     const result: any[] = [];
     if (!address) { return []; }
     for (const t of tokens) {
-      const bnBalance: ethers.BigNumber = await t.balanceOf(address);
+      const bnBalance: ethers.BigNumber = await t.balanceOf(address).catch((error: Error) => {
+        console.log(`error fetching balance for token: ${t.address} in account [${address}]`);
+        throw error;
+      });
       // console.log({ a, bnBalance });
       const decimal: number = await t.decimals();
       // console.log({ a, decimal });
       const unit: string = await t.name();
       // console.log({ a, unit });
       const nnBalance = new NewNumber.Numeric(bnBalance.toString(), -decimal, 10);
-      const datum = { unit, balance: nnBalance.normalized() };
+      const datum = { address: t.address, unit, balance: nnBalance.normalized() };
       if (nnBalance.gt(0)) {
         result.push(datum);
       }

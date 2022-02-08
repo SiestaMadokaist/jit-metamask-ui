@@ -10,7 +10,7 @@ import { MainState } from "../../lib/MainApp/state";
 import { ITx, TxData } from "../../components/tx/data";
 import { TxLog } from "../../components/tx/log";
 import styles from './view.module.css';
-import { GasCost } from "../../components/tx/GasCast";
+import { GasCost } from "../../components/tx/GasCost";
 
 export default function UITransactions(): JSX.Element {
   const router = useRouter();
