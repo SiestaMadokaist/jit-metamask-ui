@@ -8,7 +8,7 @@ interface IState {
   rpcProvider?: ethers.providers.JsonRpcProvider;
   title?: string;
   gasPrice: NewNumber.Multiplier;
-  ethPrice: NewNumber.Multiplier
+  ethPrice: NewNumber.Multiplier;
 }
 
 export class _MainState {
@@ -17,7 +17,9 @@ export class _MainState {
     provider: undefined,
     signerAddress: undefined,
     title: undefined,
-    rpcProvider: new ethers.providers.JsonRpcProvider('http://localhost:7000'),
+    // rpcProvider: new ethers.providers.JsonRpcProvider('http://localhost:7000'),
+    // rpcProvider: new ethers.providers.JsonRpcProvider('https://rinkeby.infura.io/v3/a845bcb81c074920bd0f420b3eaf22c8'),
+    rpcProvider: new ethers.providers.JsonRpcProvider('https://bsc-dataseed.binance.org'),
     gasPrice: NewNumber.multiplier(1),
     ethPrice: NewNumber.multiplier(1),
   };

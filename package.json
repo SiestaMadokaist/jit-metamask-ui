@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@cryptoket/new-number": "^1.0.29",
+    "@gnosis.pm/safe-core-sdk": "^0.2.0",
     "ethers": "^5.5.2",
     "mobx": "^6.3.9",
     "mobx-react-lite": "^3.2.2",
